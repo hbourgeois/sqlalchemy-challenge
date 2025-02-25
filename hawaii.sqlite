@@ -1,0 +1,38 @@
+import sqlite3
+import csv
+
+# Create a connection to a SQLite database
+conn = sqlite3.connect('hawaii.sqlite')
+
+# Create a cursor object
+cursor = conn.cursor()
+
+#create the measurement table
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS measurement (
+    id INTEGER PRIMARY KEY,
+    station TEXT,
+    date TEXT,
+    prcp FLOAT,
+    tobs FLOAT
+)
+''')
+
+#create the station table
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS station (
+    id INTEGER PRIMARY KEY,
+    station TEXT,
+    name TEXT,
+    latitude FLOAT,
+    longitude FLOAT,
+    elevation FLOAT
+)
+''')
+
+# Save (commit) the changes
+conn.commit()
+
+# Close the connection
+conn.close()
+
