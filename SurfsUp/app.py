@@ -115,9 +115,12 @@ def temperature_stats(start, end=None):
 
     if not end:
         # Calculate TMIN, TAVG, TMAX for dates greater than or equal to the start date
+        start=dt.datetime.strptime(start, "%m%d%Y")
         results = session.query(*sel).filter(Measurement.date >= start).all()
     else:
         # Calculate TMIN, TAVG, TMAX for dates between the start and end date inclusive
+        start=dt.datetime.strptime(start, "%m%d%Y")
+        end=dt.datetime.strptime(end, "%m%d%Y")
         results = session.query(*sel).filter(Measurement.date >= start).filter(Measurement.date <= end).all()
 
     # Convert the query results to a list
